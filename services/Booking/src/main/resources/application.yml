@@ -1,0 +1,18 @@
+spring:
+  config:
+    user-url: http://localhost:1488/User/
+    hotel-url: http://localhost:5217/hotels/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 1111
+    username: root
+    url: jdbc:mysql://localhost:3306/book
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
+  kafka:
+    
+server:
+  port: 1111

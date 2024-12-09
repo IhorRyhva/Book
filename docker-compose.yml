@@ -1,0 +1,29 @@
+version: '3.15'
+
+services:
+  postgres:
+    container_name: ms_bk_db_sql
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1111
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: ms-mail-dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  postgres:
