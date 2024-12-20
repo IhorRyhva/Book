@@ -1,14 +1,24 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/payment
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 1111
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/payment
   jpa:
     database: mysql
     show-sql: false
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rykhvaihor@gmail.com
+    password: npthhzbxjidtrbgw
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.ssl.trust: smtp.gmail.com
 server:
   port: 8020
