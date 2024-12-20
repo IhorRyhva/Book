@@ -1,22 +1,26 @@
-datasource:
-  driver-class-name: com.mysql.cj.jdbc.Driver
-  password: 1111
-  username: root
-  url: jdbc:mysql://localhost:3306/book
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQLDialect
-    database: mysql
-mail:
-  host: smtp.gmail.com
-  port: 587
-  username: rykhvaihor@gmail.com
-  password: npthhzbxjidtrbgw
-  properties:
-    mail.smtp.auth: true
-    mail.smtp.starttls.enable: true
-    mail.smtp.starttls.required: true
-    mail.smtp.ssl.trust: smtp.gmail.com
+spring:
+  config:
+    user-url: http://localhost:1488/User/
+    hotel-url: http://localhost:5217/hotels/
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 1111
+    username: root
+    url: jdbc:mysql://localhost:3306/book
+    jpa:
+      hibernate:
+        ddl-auto: update
+      database-platform: org.hibernate.dialect.MySQLDialect
+      database: mysql
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rykhvaihor@gmail.com
+    password: npthhzbxjidtrbgw
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.ssl.trust: smtp.gmail.com
 server:
   port: 1111

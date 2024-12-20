@@ -1,4 +1,4 @@
-package com.mtFirstProject.Booking;
+package com.mtFirstProject.Booking.book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class Email{
+public class EmailService {
     private final JavaMailSender mailSender;
     public void sendEmail(String to, String subject, String message) {
 
@@ -17,5 +17,6 @@ public class Email{
         simpleMailMessage.setText(message);
 
         this.mailSender.send(simpleMailMessage);
+        System.out.println("Ok");
     }
 }

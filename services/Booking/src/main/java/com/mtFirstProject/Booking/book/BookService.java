@@ -1,8 +1,6 @@
 package com.mtFirstProject.Booking.book;
 
 import com.mtFirstProject.Booking.hotelAndRoom.HotelClient;
-import com.mtFirstProject.Booking.kafka.BookConfirmation;
-import com.mtFirstProject.Booking.kafka.BookProducer;
 import com.mtFirstProject.Booking.user.UserClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final HotelClient hotelClient;
     private final UserClient userClient;
-    private final BookProducer producer;
+//    private final BookProducer producer;
 
     @Transactional
     public BookResponse createBook(BookRequest request) {
@@ -28,15 +26,15 @@ public class BookService {
         var room = this.hotelClient.getRoom(request.roomId(), hotel.name()).orElseThrow();
         var user = userClient.findByName(request.userEmail()).orElseThrow();
 
-        producer.sendBookConfirmation(
-                BookConfirmation.builder()
-                        .userEmail(user.email())
-                        .hotelName(hotel.name())
-                        .roomNumber(room.number())
-                        .settlement(request.settlement())
-                        .eviction(request.eviction())
-                        .build()
-        );
+//        producer.sendBookConfirmation(
+//                BookConfirmation.builder()
+//                        .userEmail(user.email())
+//                        .hotelName(hotel.name())
+//                        .roomNumber(room.number())
+//                        .settlement(request.settlement())
+//                        .eviction(request.eviction())
+//                        .build()
+//        );
         return getBookResponse(request);
     }
 
