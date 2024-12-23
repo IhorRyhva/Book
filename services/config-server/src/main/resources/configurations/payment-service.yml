@@ -5,10 +5,10 @@ spring:
     password: 1111
     url: jdbc:mysql://localhost:3306/payment
   jpa:
-    database: mysql
     show-sql: false
     hibernate:
       ddl-auto: update
+    database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
   mail:
     host: smtp.gmail.com

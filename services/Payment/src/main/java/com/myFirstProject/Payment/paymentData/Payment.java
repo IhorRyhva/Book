@@ -21,5 +21,6 @@ public class Payment {
 
     @Enumerated
     PaymentType paymentType;
-    int value;
+    Integer cardNumber;
+    Integer value;
 }

@@ -10,10 +10,13 @@ import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class EmailService {
-
     private final JavaMailSender mailSender;
+
+    public EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
     public void send(String to, String subject, String message){
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(to);

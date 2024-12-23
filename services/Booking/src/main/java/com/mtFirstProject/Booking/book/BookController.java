@@ -11,7 +11,7 @@ import java.util.List;
 public class BookController {
     BookService service;
     @PostMapping("create")
-    public ResponseEntity<BookResponse> createBook(@RequestParam BookRequest request){
+    public ResponseEntity<BookResponse> createBook(@RequestBody BookRequest request){
         return ResponseEntity.ok(service.createBook(request));
     }
     @GetMapping("{id}")

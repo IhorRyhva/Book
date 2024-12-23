@@ -24,6 +24,7 @@ public class Book {
     private String hotel_name;
     private Integer roomId;
     private String userEmail;
+    private Long payment_id;
 
     private LocalDate settlement;
     private LocalDate eviction;

@@ -22,6 +22,7 @@ public record BookRequest(
         @NotNull
         @NotBlank
         @NotEmpty
-        String userEmail
+        String userEmail,
+        Long payment_id
 ){
 }

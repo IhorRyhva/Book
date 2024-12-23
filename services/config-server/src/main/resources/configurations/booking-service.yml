@@ -2,6 +2,7 @@ spring:
   config:
     user-url: http://localhost:1488/User/
     hotel-url: http://localhost:5217/hotels/
+    payment-url: http://localhost:8020/payment/
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 1111
