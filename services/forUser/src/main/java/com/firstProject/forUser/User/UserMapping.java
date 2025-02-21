@@ -17,15 +17,9 @@ public class UserMapping {
     public User fromRequest(UserRequest request) {
         return User
                 .builder()
-                .id(request.id())
                 .lastname(request.lastName())
                 .firstname(request.firstName())
                 .email(request.email())
                 .build();
-    }
-
-    public boolean same(UserRequest request, User user) {
-        User check = fromRequest(request);
-        return user.equals(check);
     }
 }

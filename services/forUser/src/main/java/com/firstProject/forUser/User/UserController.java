@@ -12,14 +12,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService service;
-
     @GetMapping("all")
     public ResponseEntity<List<UserResponse>> getAll(){
         return ResponseEntity.ok(service.getAllUser());
     }
-    @GetMapping("exist/{user-id}")
-    public ResponseEntity<Boolean> existById(@PathVariable("user-id") int id){
-        return ResponseEntity.ok(service.exist(id));
+    @GetMapping("exist/{user-email}")
+    public ResponseEntity<Boolean> existByEmail(@PathVariable("user-email") String email){
+        return ResponseEntity.ok(service.exist(email));
     }
     @GetMapping("{user-id}")
     public ResponseEntity<UserResponse> findById(@PathVariable("user-id") int id){
@@ -33,9 +32,9 @@ public class UserController {
     public ResponseEntity<Boolean> update(@Valid @RequestBody UserRequest request){
         return ResponseEntity.ok(service.update(request));
     }
-    @DeleteMapping("delete/{user-id}")
-    public ResponseEntity<Void> delete(@PathVariable("user-id") int id){
-        service.delete(id);
+    @DeleteMapping("delete/{user-email}")
+    public ResponseEntity<Void> delete(@PathVariable("user-email") String email){
+        service.delete(email);
         return ResponseEntity.accepted().build();
     }
     @GetMapping("findByName/{email}")

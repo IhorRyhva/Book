@@ -1,5 +1,6 @@
 package com.firstProject.forUser.User;
 
+import com.firstProject.forUser.User.insertedData.InsertData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +13,16 @@ public class UserService {
     private final UserMapping mapping;
     private final UserRepository repository;
     public List<UserResponse> getAllUser() {
+        InsertData insertData = new InsertData();
+        insertData.create(repository);
         return repository
                 .findAll()
                 .stream()
                 .map(mapping::toResponse)
                 .collect(Collectors.toList());
     }
-    public Boolean exist(int id) {
-        return repository.existsById(id);
+    public Boolean exist(String email) {
+        return repository.existsByEmail(email);
     }
 
     public UserResponse getById(int id) {
@@ -38,21 +41,16 @@ public class UserService {
     }
 
     public Boolean update(UserRequest request) {
-        if(exist(request.id())){
-            if(mapping.same(request, repository.findById(request.id()).get())){
-                throw new withoutChangeException("This is same");
-            }else{
-                repository.save(mapping.fromRequest(request));
-                return true;
-            }
-        }else{
-            return false;
+        if(exist(request.email())) {
+            repository.save(mapping.fromRequest(request));
+            return true;
         }
+        return false;
     }
 
-    public void delete(int id) {
-        if(Boolean.TRUE.equals(exist(id))){
-            repository.deleteById(id);
+    public void delete(String email) {
+        if(Boolean.TRUE.equals(exist(email))){
+            repository.deleteAllByEmail(email);
         }
     }
 

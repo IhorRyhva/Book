@@ -10,19 +10,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Component
-@RequiredArgsConstructor
+//@Component
+//@RequiredArgsConstructor
 public class Cleaner {
-    private final BookRepository bookRepository;
-    @Bean
-    @Scheduled(cron = "0 0 0 * * ?")
-    public void clean(){
-        List<Book> books = bookRepository.findAll();
-        LocalDate localDate = LocalDate.now();
-        for(Book book: books){
-            if(book.getEviction().isBefore(localDate)){
-                bookRepository.delete(book);
-            }
-        }
-    }
+//    private final BookRepository bookRepository;
+//    @Bean
+//    @Scheduled(cron = "0 0 0 * * ?")
+//    public void clean(){
+//        List<Book> books = bookRepository.findAll();
+//        LocalDate localDate = LocalDate.now();
+//        for(Book book: books){
+//            if(book.getEviction().isBefore(localDate)){
+//                bookRepository.delete(book);
+//            }
+//        }
+//    }
 }

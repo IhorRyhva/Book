@@ -1,0 +1,25 @@
+server:
+  port: 1188
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: booking-service
+          uri: lb:http://BOOKING-SERVICE
+          predicates:
+            - Path=/books/**
+        - id: hotel-microservice
+          uri: lb:http://HOTEL-MICROSERVICE
+          predicates:
+            - Path=/hotels/**
+        - id: payment-service
+          uri: lb:http://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment/**
+        - id: user-service
+          uri: lb:http://USER-SERVICE
+          predicates:
+            - Path=/User/**

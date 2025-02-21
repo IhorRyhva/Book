@@ -9,19 +9,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="forUser" />
         <module name="config-server" />
+        <module name="Payment" />
+        <module name="discavery" />
         <module name="Booking" />
         <module name="BookingService" />
-        <module name="discavery" />
         <module name="Hotel" />
-      </profile>
-      <profile name="Annotation profile for Payment" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="Payment" />
+        <module name="gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -42,6 +35,7 @@
       <module name="discavery" options="-parameters" />
       <module name="discovery" options="-parameters" />
       <module name="forUser" options="-parameters" />
+      <module name="gateway" options="-parameters" />
     </option>
   </component>
 </project>

@@ -23,6 +23,6 @@ public record BookRequest(
         @NotBlank
         @NotEmpty
         String userEmail,
-        Long payment_id
+        PaymentType paymentType
 ){
 }

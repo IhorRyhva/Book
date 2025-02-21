@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 public record UserRequest(
-        int id,
         @NotNull(message = "firstName is required")
         String firstName,
         @NotNull(message = "lastName is required")

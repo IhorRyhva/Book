@@ -1,0 +1,341 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5217",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/hotels/add": {
+      "post": {
+        "tags": [
+          "hotel-controller"
+        ],
+        "operationId": "createHotel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HotelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/{hotel}": {
+      "get": {
+        "tags": [
+          "hotel-controller"
+        ],
+        "operationId": "getHotelByName",
+        "parameters": [
+          {
+            "name": "hotel",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/HotelResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/{hotel-name}/rooms/{Id}": {
+      "get": {
+        "tags": [
+          "hotel-controller"
+        ],
+        "operationId": "getRoom",
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "hotel-name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoomResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/rooms": {
+      "get": {
+        "tags": [
+          "hotel-controller"
+        ],
+        "operationId": "getAllHotelsRooms",
+        "parameters": [
+          {
+            "name": "hotel_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RoomResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/": {
+      "get": {
+        "tags": [
+          "hotel-controller"
+        ],
+        "operationId": "getAllHotels",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HotelResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HotelDb": {
+        "required": [
+          "location",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stars": {
+            "type": "string",
+            "enum": [
+              "ONE",
+              "TWO",
+              "THREE",
+              "FOUR",
+              "FIVE"
+            ]
+          },
+          "location": {
+            "type": "string"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomDb"
+            }
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "HotelRequest": {
+        "type": "object",
+        "properties": {
+          "stars": {
+            "type": "string",
+            "enum": [
+              "ONE",
+              "TWO",
+              "THREE",
+              "FOUR",
+              "FIVE"
+            ]
+          },
+          "location": {
+            "type": "string"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomDb"
+            }
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomDb": {
+        "required": [
+          "rate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rate": {
+            "type": "string",
+            "enum": [
+              "LUX",
+              "FAMILY",
+              "ECONOMIC",
+              "PRESIDENT"
+            ]
+          },
+          "numberOfBed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "worthPerNight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hotelDb": {
+            "$ref": "#/components/schemas/HotelDb"
+          }
+        }
+      },
+      "HotelResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stars": {
+            "type": "string",
+            "enum": [
+              "ONE",
+              "TWO",
+              "THREE",
+              "FOUR",
+              "FIVE"
+            ]
+          },
+          "location": {
+            "type": "string"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomResponse"
+            }
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hotel_name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "string",
+            "enum": [
+              "LUX",
+              "FAMILY",
+              "ECONOMIC",
+              "PRESIDENT"
+            ]
+          },
+          "numberOfBed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "worthPerNight": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 )
 public interface PaymentClient {
     @PostMapping("create")
-    ResponseEntity<Long> createPayment(@RequestBody PaymentRequest paymentRequest);
+    ResponseEntity<PaymentResponse> createPayment(@RequestBody PaymentRequest paymentRequest);
     @DeleteMapping("delete/{id}")
     ResponseEntity<Void> delete(@PathVariable(name = "id") Long id);
 }

@@ -1,15 +1,16 @@
 package com.mtFirstProject.Booking.payment;
-
 import com.mtFirstProject.Booking.book.PaymentType;
+import jakarta.persistence.Enumerated;
 import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Builder
-public record PaymentRequest(
-        Integer value,
-        String email,
+public record PaymentResponse(
+        String userName,
+        PaymentType paymentType,
         Integer cardNumber,
-        PaymentType paymentType
-) {
+        Integer value)
+{
 }
