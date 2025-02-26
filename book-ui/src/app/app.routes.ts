@@ -1,11 +1,13 @@
 import {RouterModule, Routes} from '@angular/router';
-import {HotelsComponent} from './pages/hotels/hotels.component';
+
 import {NgModule} from '@angular/core';
+import {MainComponent} from './modules/hotels/pages/main/main.component';
 
 export const routes: Routes = [
   {
     path: 'hotels/hotel',
-    component: HotelsComponent
+    //loadChildren: () => import('./modules/hotels/hotels.module').then(m => m.HotelsModule)
+    component: MainComponent
   }
 ];
 @NgModule({
