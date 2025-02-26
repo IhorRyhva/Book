@@ -2,7 +2,6 @@ package com.firstProject.Hotel.Controllers;
 
 import com.firstProject.Hotel.Model.Hotel.*;
 import com.firstProject.Hotel.Model.Room.*;
-import com.firstProject.Hotel.forTest.Hotels;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
