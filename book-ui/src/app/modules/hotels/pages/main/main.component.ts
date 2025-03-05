@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HotelRequest} from '../../../../services/models/hotel-request';
+import {HotelRequest} from '../../../../services/hotel/models/hotel-request';
 import {RouterModule} from '@angular/router';
 import {MenuComponent} from '../../commponets/menu/menu.component';
 

@@ -5,7 +5,7 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
-import {AppComponent} from '../app.component';
+import {AppComponent} from '../../app.component';
 import {HttpClient, provideHttpClient} from '@angular/common/http';
 
 /**
