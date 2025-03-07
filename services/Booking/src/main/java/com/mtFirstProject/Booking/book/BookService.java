@@ -35,8 +35,10 @@ public class BookService {
     public BookResponse createBook(BookRequest request) {
         var hotel = this.hotelClient.getHotelByName(request.hotel_name()).orElseThrow();/**TODO**/
         System.out.println(hotel.name());
+
         var room = this.hotelClient.getRoom(request.roomId(), hotel.name()).orElseThrow();
         System.out.println(room.number());
+
         var user = userClient.findByName(request.userEmail()).orElseThrow();
         System.out.println(user.firstName());
 
