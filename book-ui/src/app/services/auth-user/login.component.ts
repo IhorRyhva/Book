@@ -7,8 +7,6 @@ import {KeycloakService} from '../../services/keycloak/keycloak.service';
 })
 export class LoginComponent implements OnInit {
 
-  authRequest: AuthenticationRequest = {email: '', password: ''};
-  errorMsg: Array<string> = [];
 
   constructor(
     private ss: KeycloakService
