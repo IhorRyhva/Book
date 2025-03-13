@@ -3,6 +3,7 @@ package com.firstProject.forUser.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class UserController {
     @GetMapping("findByName/{email}")
     public ResponseEntity<UserResponse> findByName(@PathVariable("email") String email){
         return ResponseEntity.ok(service.findByName(email));
+    }
+    @GetMapping
+    @PreAuthorize("hasRole('client-admin')")
+    public String test(){
+        return "Hello world";
     }
 }
