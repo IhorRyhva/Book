@@ -9,7 +9,7 @@ import {MainComponent} from './modules/hotels/pages/main/main.component';
 import {HotelsModule} from './modules/hotels/hotels.module';
 import {MenuComponent} from './modules/hotels/commponets/menu/menu.component';
 import {KeycloakService} from './services/keycloak/keycloak.service';
-import {LoginComponent} from './services/auth-user/login.component';
+
 export function kcFactory(kcService: KeycloakService){
   return () => kcService.init();
 }
@@ -18,7 +18,6 @@ export function kcFactory(kcService: KeycloakService){
     AppComponent,
     MainComponent,
     MenuComponent,
-    LoginComponent
   ],
   imports: [
     BrowserModule,

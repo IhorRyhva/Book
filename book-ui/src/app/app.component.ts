@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {KeycloakService} from './services/keycloak/keycloak.service';
+import {UserProfile} from './services/keycloak/user-profile';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,15 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'book-ui';
+  profile?: UserProfile;
+
+  constructor(private keycloakService: KeycloakService) {}
+
+  ngOnInit() {
+    this.profile = this.keycloakService.profile;
+  }
+
+  logout() {
+    this.keycloakService.logout();
+  }
 }
