@@ -78,17 +78,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- SECURITY -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
 		<!-- CLOUD -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -112,6 +101,8 @@
 			<artifactId>javafaker</artifactId>
 			<version>1.0.2</version>
 		</dependency>
+
+
 
 	</dependencies>
 	<dependencyManagement>

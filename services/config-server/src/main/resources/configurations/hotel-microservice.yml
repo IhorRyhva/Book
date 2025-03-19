@@ -10,5 +10,18 @@ spring:
       ddl-auto: update
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
+  security:
+      oauth2:
+        resourceserver:
+          jwt:
+            issuer-uri: "http://localhost:9090/realms/book-hotel"
+            jwk-set-uri: "http://localhost:9090/realms/book-hotel/protocol/openid-connect/certs"
+keycloak:
+  auth-server-url: http://localhost:9090
+  realm: book-hotel
+  resource: spring-boot-client
+  credentials:
+    secret: pJrSiE47lYdcQaA2qqrO7T2zg42ERcmJ
+  use-resource-role-mappings: true
 server:
   port: 5217
