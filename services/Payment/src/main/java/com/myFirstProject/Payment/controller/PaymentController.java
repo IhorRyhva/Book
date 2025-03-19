@@ -1,12 +1,10 @@
 package com.myFirstProject.Payment.controller;
 
-import com.myFirstProject.Payment.forPayment.EmailService;
 import com.myFirstProject.Payment.forPayment.PaymentService;
 import com.myFirstProject.Payment.paymentData.PaymentRequest;
 import com.myFirstProject.Payment.paymentData.PaymentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
