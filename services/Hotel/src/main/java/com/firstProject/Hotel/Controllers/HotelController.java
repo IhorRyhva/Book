@@ -4,6 +4,7 @@ import com.firstProject.Hotel.Model.Hotel.*;
 import com.firstProject.Hotel.Model.Room.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class HotelController {
     public ResponseEntity<HotelResponse> getHotelByName(@PathVariable("hotel") String hotel){
         return ResponseEntity.ok(hotelService.findByName(hotel));
     }
-
+    @PreAuthorize("hasRole='client-admin'")
     @PostMapping("add")
     public ResponseEntity<Integer> createHotel(@RequestBody HotelRequest request){
         return ResponseEntity.ok(hotelService.create(request));
