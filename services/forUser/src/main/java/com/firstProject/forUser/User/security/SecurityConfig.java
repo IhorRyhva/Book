@@ -1,4 +1,4 @@
-package com.firstProject.forUser.User;
+package com.firstProject.forUser.User.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/User/all")
-                        .hasAuthority("client-admin")
+                        .hasRole("client-admin")
                 .anyRequest()
                     .authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(
@@ -32,12 +32,10 @@ public class SecurityConfig {
     }
     @Bean
     public JwtAuthenticationConverter authConvertor(){
-        JwtGrantedAuthoritiesConverter jwtGrantedAuthorities = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthorities.setAuthorityPrefix("");
-        jwtGrantedAuthorities.setAuthoritiesClaimName("realm_access.roles");
+        JwtConverter jwtConverter = new JwtConverter();
 
         JwtAuthenticationConverter jwtAuthentication = new JwtAuthenticationConverter();
-        jwtAuthentication.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthorities);
+        jwtAuthentication.setJwtGrantedAuthoritiesConverter(jwtConverter);
         return jwtAuthentication;
     }
 }
