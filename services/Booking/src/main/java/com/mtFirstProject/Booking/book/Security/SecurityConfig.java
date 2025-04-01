@@ -38,12 +38,10 @@ public class SecurityConfig {
     }
 
     private JwtAuthenticationConverter jwtConvertor() {
-        JwtGrantedAuthoritiesConverter jwtAuthor = new JwtGrantedAuthoritiesConverter();
-        jwtAuthor.setAuthorityPrefix("");
-        jwtAuthor.setAuthoritiesClaimName("realm_access.roles");
+        JwtConvert jwtConvert = new JwtConvert();
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtAuthor);
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtConvert);
         return jwtAuthenticationConverter;
     }
 }

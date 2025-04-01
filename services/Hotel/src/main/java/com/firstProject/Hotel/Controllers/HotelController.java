@@ -21,11 +21,12 @@ public class HotelController {
     public ResponseEntity<List<HotelResponse>> getAllHotels(){
         return ResponseEntity.ok(hotelService.getAll());
     }
+
     @GetMapping("{hotel}")
     public ResponseEntity<HotelResponse> getHotelByName(@PathVariable("hotel") String hotel){
         return ResponseEntity.ok(hotelService.findByName(hotel));
     }
-    @PreAuthorize("hasRole='client-admin'")
+
     @PostMapping("add")
     public ResponseEntity<Integer> createHotel(@RequestBody HotelRequest request){
         return ResponseEntity.ok(hotelService.create(request));

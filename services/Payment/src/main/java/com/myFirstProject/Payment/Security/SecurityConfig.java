@@ -35,12 +35,9 @@ public class SecurityConfig {
     }
     @Bean
     public JwtAuthenticationConverter jwtConvertor() {
-        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        authoritiesConverter.setAuthorityPrefix("");
-        authoritiesConverter.setAuthoritiesClaimName("realm_access.roles");
-
+        JwtConvert jwtConvert = new JwtConvert();
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtConvert);
         return jwtAuthenticationConverter;
     }
 }

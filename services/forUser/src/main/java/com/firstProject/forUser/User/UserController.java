@@ -14,13 +14,12 @@ import java.util.List;
 public class UserController {
     private final UserService service;
     //ALL//
-    @PreAuthorize("hasRole='client-admin'")
+
     @GetMapping("all")
     public ResponseEntity<List<UserResponse>> getAll(){
         return ResponseEntity.ok(service.getAllUser());
     }
     //EXIST//
-    //@PreAuthorize("hasRole='client-admin'")
     @GetMapping("exist/{user-email}")
     public ResponseEntity<Boolean> existByEmail(@PathVariable("user-email") String email){
         return ResponseEntity.ok(service.exist(email));

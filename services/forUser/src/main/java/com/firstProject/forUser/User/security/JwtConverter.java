@@ -8,16 +8,18 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JwtConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
+
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
+        System.out.println("JWT claims: " + jwt.getClaims());
+
         Map<String, Object> realmAccess = jwt.getClaim("realm_access");
 
-        if(realmAccess == null || !realmAccess.containsKey("roles")){
+        if(realmAccess.isEmpty() || !realmAccess.containsKey("roles")){
             return Collections.emptyList();
         }
 
         List<String> roles = (List<String>) realmAccess.get("roles");
-        roles.forEach(System.out::println);
-        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return roles.stream().map(SimpleGrantedAuthority::new).peek(System.out::println).collect(Collectors.toList());
     }
 }
