@@ -1,6 +1,7 @@
 package com.firstProject.Hotel.Model.Hotel;
 
 import com.firstProject.Hotel.Model.Room.RoomRepository;
+import com.firstProject.Hotel.Model.Room.RoomRequest;
 import com.firstProject.Hotel.exception.HotelExistException;
 import com.firstProject.Hotel.forTest.Hotels;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,14 @@ public class HotelService {
                 .collect(Collectors.toList());
     }
 
-    public Integer create(HotelRequest request) {
+    public Integer create(FullHotelRequest fullHotelRequest) {
+        HotelRequest request = fullHotelRequest.request();
+        List<RoomRequest> rooms = fullHotelRequest.rooms();
+
         if(repository.existsByName(request.name())){
             throw new HotelExistException();
         }
-        HotelDb hotelDb = mapper.createHotel(request);
+        HotelDb hotelDb = mapper.createHotel(request, rooms);
         return repository.save(hotelDb).getId();
     }
     public HotelDb getById(int id){

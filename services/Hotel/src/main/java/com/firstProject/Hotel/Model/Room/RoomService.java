@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class RoomService {
     private final RoomMapper mapper;
     private final HotelService hotelService;
-    private final RoomRepository roomRepository;
     public List<RoomResponse> getAllRoomsByHotelId(Integer hotel_id) {
         return hotelService
                 .getById(hotel_id)

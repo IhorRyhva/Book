@@ -28,8 +28,9 @@ public class HotelController {
     }
 
     @PostMapping("add")
-    public ResponseEntity<Integer> createHotel(@RequestBody HotelRequest request){
-        return ResponseEntity.ok(hotelService.create(request));
+    public ResponseEntity<Integer> createHotel(@RequestBody FullHotelRequest fullHotelRequest){
+        System.out.println(fullHotelRequest.request());
+        return ResponseEntity.ok(hotelService.create(fullHotelRequest));
     }
 
     @GetMapping("rooms")
