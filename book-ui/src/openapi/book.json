@@ -1,0 +1,218 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:1111",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/books/create": {
+      "post": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "createBook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "getById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/all": {
+      "get": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "getAll",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/all/{room-id}": {
+      "get": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "getAllBookForRoom",
+        "parameters": [
+          {
+            "name": "room-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/books/delete/{id}": {
+      "delete": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BookRequest": {
+        "required": [
+          "hotel_name",
+          "userEmail"
+        ],
+        "type": "object",
+        "properties": {
+          "settlement": {
+            "type": "string",
+            "format": "date"
+          },
+          "eviction": {
+            "type": "string",
+            "format": "date"
+          },
+          "hotel_name": {
+            "type": "string"
+          },
+          "roomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userEmail": {
+            "type": "string"
+          },
+          "paymentType": {
+            "type": "string",
+            "enum": [
+              "VISA",
+              "MASTER_CARD"
+            ]
+          }
+        }
+      },
+      "BookResponse": {
+        "type": "object",
+        "properties": {
+          "settlement": {
+            "type": "string",
+            "format": "date"
+          },
+          "eviction": {
+            "type": "string",
+            "format": "date"
+          },
+          "hotel_name": {
+            "type": "string"
+          },
+          "roomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userEmail": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

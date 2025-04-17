@@ -6,10 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class JwtConvert implements Converter<Jwt, Collection<GrantedAuthority>> {
@@ -18,8 +15,10 @@ public class JwtConvert implements Converter<Jwt, Collection<GrantedAuthority>> 
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Map<String, Object> realms = jwt.getClaim("realms_access");
 
-        if(realms.isEmpty() || !realms.containsKey("roles")){
-            return Collections.emptyList();
+        if(realms == null || !realms.containsKey("roles")){
+            List<String> roles = new ArrayList<>();
+            roles.add("just-user");
+            return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         }
 
         List<String> roles = (List<String>) realms.get("roles");
