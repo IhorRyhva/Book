@@ -1,5 +1,10 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.forController;
 
+import com.mtFirstProject.Booking.book.data.BookRepository;
+import com.mtFirstProject.Booking.book.data.BookRequest;
+import com.mtFirstProject.Booking.book.data.BookResponse;
+import com.mtFirstProject.Booking.book.data.DateOfBook;
+import com.mtFirstProject.Booking.book.helpers.EmailService;
 import com.mtFirstProject.Booking.hotelAndRoom.HotelClient;
 import com.mtFirstProject.Booking.hotelAndRoom.HotelResponse;
 import com.mtFirstProject.Booking.hotelAndRoom.RoomResponse;
@@ -14,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +32,7 @@ public class BookService {
     private final PaymentClient paymentClient;
     private final PaymentService paymentService;
     private final EmailService emailService;
+    private final Helper helper;
     DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //    private final BookProducer producer;
 
@@ -48,20 +53,16 @@ public class BookService {
 
         var payment = paymentClient.createPayment(getPaymentRequest(request, room, book, user)).getBody();
         bookRepository.save(book);
-        String message = getMessage(eviction, settlement, payment, room, hotel);
+        String message = helper.getMessage(eviction, settlement, payment, room, hotel);
         emailService.sendEmail(user.email(), "Booked", message);
         return bookMapper.toResponse(book);
     }
 
-    private String getMessage(String eviction, String settlement, PaymentResponse payment, RoomResponse room, HotelResponse hotel) {
-        return String.format("You book from %s to %s, paid %n, room %n (%s), in hotel %s",
-                eviction, settlement, payment.value(), room.number(), room.rate().name(), hotel.name());
-    }
-
+    //get PaymentRequest
     private PaymentRequest getPaymentRequest(BookRequest request, RoomResponse room, Book book, UserResponse user) {
         return paymentService.create(room.worthPerNight(), book.getBusyDays().size() + 1, user.email(), 0, request.paymentType());
     }
-
+    //ForSave
     private Book saveBook(BookRequest request) {
         if(request.eviction().isBefore(request.settlement())
                 || request.settlement().isBefore(LocalDate.now())){
@@ -76,27 +77,4 @@ public class BookService {
         }
     }
 
-    public BookResponse getBook(Integer id) {
-        Book book = bookRepository.findById(id)
-                .orElseThrow();/**TODO**/
-        return bookMapper.toResponse(book);
-    }
-
-    public void remove(Integer id) {
-        bookRepository.deleteById(id);
-    }
-
-    public List<BookResponse> getAll() {
-        return bookRepository.findAll()
-                .stream()
-                .map(bookMapper::toResponse)
-                .collect(Collectors.toList());
-    }
-
-    public List<BookResponse> getAllBookForRoom(Integer id) {
-        return bookRepository.findBooksByRoomId(id)
-                .stream()
-                .map(bookMapper::toResponse)
-                .collect(Collectors.toList());
-    }
 }

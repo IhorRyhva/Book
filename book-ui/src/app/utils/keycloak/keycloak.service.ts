@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Keycloak from 'keycloak-js/lib/keycloak';
+import Keycloak from 'keycloak-js';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class KeycloakService {
   async init(){
     const authenticated = await this.keycloak.init(
       {
-        onLoad: 'login-required'
+        onLoad: 'check-sso'
       }
     );
   }

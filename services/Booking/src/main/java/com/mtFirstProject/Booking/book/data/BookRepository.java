@@ -1,5 +1,6 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.data;
 
+import com.mtFirstProject.Booking.book.forController.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

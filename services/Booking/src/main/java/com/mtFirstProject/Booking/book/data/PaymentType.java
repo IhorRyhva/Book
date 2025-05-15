@@ -1,4 +1,4 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.data;
 
 public enum PaymentType {
     VISA,

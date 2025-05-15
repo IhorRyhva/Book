@@ -1,4 +1,4 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.helpers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

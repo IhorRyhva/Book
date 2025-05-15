@@ -1,10 +1,7 @@
 package com.mtFirstProject.Booking.payment;
 
-import com.mtFirstProject.Booking.book.PaymentType;
+import com.mtFirstProject.Booking.book.data.PaymentType;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Service
 public class PaymentService {

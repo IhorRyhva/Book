@@ -1,9 +1,10 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.forController;
 
+import com.mtFirstProject.Booking.book.data.BookRequest;
+import com.mtFirstProject.Booking.book.data.BookResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

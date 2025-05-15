@@ -1,5 +1,6 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.forController;
 
+import com.mtFirstProject.Booking.book.data.PaymentType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class Book {
     private List<LocalDate> findBusyDays(LocalDate settlement, LocalDate eviction) {
         List<LocalDate> busyDays = new ArrayList<>();
         LocalDate tempSettlement = settlement;
-        LocalDate tempEviction = eviction.minusDays(1);
+        LocalDate tempEviction = eviction;
 
         while (tempSettlement.isBefore(tempEviction)){
             tempSettlement = tempSettlement.plusDays(1);

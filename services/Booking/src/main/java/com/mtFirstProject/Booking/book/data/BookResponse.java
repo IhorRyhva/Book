@@ -1,4 +1,4 @@
-package com.mtFirstProject.Booking.book;
+package com.mtFirstProject.Booking.book.data;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

@@ -1,9 +1,7 @@
 package com.mtFirstProject.Booking.payment;
 
-import com.mtFirstProject.Booking.book.PaymentType;
+import com.mtFirstProject.Booking.book.data.PaymentType;
 import lombok.Builder;
-
-import java.time.LocalDateTime;
 
 @Builder
 public record PaymentRequest(
