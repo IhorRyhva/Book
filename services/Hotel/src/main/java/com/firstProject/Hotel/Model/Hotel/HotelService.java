@@ -45,4 +45,12 @@ public class HotelService {
     public HotelResponse findByName(String hotel) {
         return mapper.toResponse(repository.findByName(hotel));
     }
+
+    public List<HotelResponse> getByLocation(String location) {
+        return repository.findByLocation(location)
+                .stream()
+                .map(mapper::toResponse)
+                .collect(Collectors
+                        .toList());
+    }
 }

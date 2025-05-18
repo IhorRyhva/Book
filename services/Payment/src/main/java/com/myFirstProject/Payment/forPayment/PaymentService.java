@@ -21,8 +21,7 @@ public class PaymentService {
         LocalDate pay = LocalDate.now();
         Payment payment = repository.save(mapping.toPayment(paymentRequest, pay));
         String time = CUSTOM_FORMATTER.format(pay);
-        String s = String.format("%s successfully paid %n in %s", paymentRequest.email(), paymentRequest.value(), time);
-        emailService.send(paymentRequest.email(), "Payment", s);
+        emailService.send(paymentRequest.email(), "Payment", paymentRequest.message());
         return mapping.toResponse(payment);
     }
 

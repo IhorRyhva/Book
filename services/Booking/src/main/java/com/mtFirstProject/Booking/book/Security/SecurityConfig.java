@@ -1,5 +1,6 @@
 package com.mtFirstProject.Booking.book.Security;
 
+import com.mtFirstProject.Booking.book.Security.JwtConvert;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -11,37 +12,37 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 @EnableMethodSecurity
+@EnableWebSecurity
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**",
-                        "/v2/api-docs",
-                        "/v3/api-docs",
-                        "/v3/api-docs/**",
-                        "/swagger-resources",
-                        "/swagger-resources/**",
-                        "/configuration/ui",
-                        "/configuration/security",
-                        "/swagger-ui/**",
-                        "/webjars/**",
-                        "/swagger-ui.html",
-                        "/ws/**")
-                .permitAll()
-                .requestMatchers(
-                "/books/{id}",
-                "/books/all",
-                "/books/all/{room-id}",
-                "/books/delete/{id}"
-        ).hasAuthority("client-admin")
-                .anyRequest().authenticated())
-                .oauth2ResourceServer(auth -> auth.jwt(
+                        .requestMatchers("/auth/**",
+                                "/v2/api-docs",
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-resources",
+                                "/swagger-resources/**",
+                                "/configuration/ui",
+                                "/configuration/security",
+                                "/swagger-ui/**",
+                                "/webjars/**",
+                                "/swagger-ui.html",
+                                "/ws/**")
+                        .permitAll()
+                        .requestMatchers(
+                                "/books/*",
+                                "/books/all",
+                                "/books/all/*",
+                                "/books/delete/*")
+                        .hasAuthority("client-admin")
+                        .anyRequest().permitAll())
+                .oauth2ResourceServer(outh2 -> outh2.jwt(
                         jwt -> jwt.jwtAuthenticationConverter(jwtConvertor())
                 ));
         return http.build();
@@ -50,10 +51,9 @@ public class SecurityConfig {
     public JwtDecoder jwtDecoder(){
         return NimbusJwtDecoder.withJwkSetUri("http://localhost:9090/realms/book-hotel/protocol/openid-connect/certs").build();
     }
-
-    private JwtAuthenticationConverter jwtConvertor() {
+    @Bean
+    public JwtAuthenticationConverter jwtConvertor() {
         JwtConvert jwtConvert = new JwtConvert();
-
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtConvert);
         return jwtAuthenticationConverter;

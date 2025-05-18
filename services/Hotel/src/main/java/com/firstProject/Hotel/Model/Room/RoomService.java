@@ -28,6 +28,7 @@ public class RoomService {
     public RoomResponse getRoom(Integer number, String hotelName) {
         HotelResponse hotel = hotelService.findByName(hotelName);
         List<RoomResponse> roomResponses = hotel.rooms();
+        System.out.println(roomResponses.get(number - 1));
         return roomResponses.get(number - 1);
     }
 }

@@ -2,19 +2,14 @@ import {ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetec
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {provideHttpClient} from '@angular/common/http';
 import {KeycloakService} from './utils/keycloak/keycloak.service';
-import {keycloakHttpInterceptor} from './utils/http/keycloak-http.interceptor';
-import {NgModel} from '@angular/forms';
-
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(
-      withInterceptors([keycloakHttpInterceptor])
-    ),
+    provideHttpClient(),
     provideAppInitializer(() => {
       const initFn = ((key: KeycloakService) => {
         return() => key.init();

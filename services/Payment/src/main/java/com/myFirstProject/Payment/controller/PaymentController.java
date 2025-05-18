@@ -14,6 +14,7 @@ public class PaymentController {
     private final PaymentService service;
     @PostMapping("create")
     public ResponseEntity<PaymentResponse> createPayment(@RequestBody PaymentRequest paymentRequest){
+        System.out.println(paymentRequest);
         return ResponseEntity.ok(service.createPayment(paymentRequest));
     }
     @DeleteMapping("delete/{id}")

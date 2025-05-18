@@ -28,7 +28,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Hotels {
     private final HotelRepository hotelRepository;
     public void create(){
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 11; i <= 20; i++) {
             HotelDb hotelDb = getHotel(i, "tempName" + i);
             List<RoomDb> rooms = new ArrayList<>();
             for (int j = 1; j <= 100; j++) {

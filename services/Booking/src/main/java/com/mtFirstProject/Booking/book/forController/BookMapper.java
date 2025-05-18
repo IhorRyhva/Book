@@ -36,7 +36,7 @@ public class BookMapper {
     }
     public Book toBook(BookRequest request) {
         Book book = Book.builder()
-                .roomId(request.roomId())
+                .roomId(request.roomNumber())
                 .userEmail(request.userEmail())
                 .hotel_name(request.hotel_name())
                 .settlement(request.settlement())

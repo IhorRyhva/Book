@@ -17,7 +17,7 @@ public record BookRequest(
         @NotEmpty
         String hotel_name,
         @Positive
-        Integer roomId,
+        Integer roomNumber,
         @NotNull
         @NotBlank
         @NotEmpty

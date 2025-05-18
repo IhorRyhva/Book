@@ -14,7 +14,7 @@ public class InsertData {
             Faker faker = new Faker();
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
-            String email = String.format("%s%s%n@gmail.com", firstName, lastName, i);
+            String email = String.format("%s%s%@gmail.com", firstName, lastName, i);
             User user = User.builder()
                     .firstname(firstName)
                     .lastname(lastName)
