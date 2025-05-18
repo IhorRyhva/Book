@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .requestMatchers("/User/all")
                         .hasAuthority("client-admin")
                 .anyRequest()
-                    .authenticated())
+                    .permitAll())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(
                         jwt -> jwt.jwtAuthenticationConverter(authConvertor())
                 ));

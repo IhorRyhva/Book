@@ -14,10 +14,12 @@ import java.util.Optional;
         url = "${spring.config.hotel-url}"
 )
 public interface HotelClient {
-    @GetMapping("{hotel}")
+    @GetMapping("/")
+    Optional<List<HotelResponse>> getAllHotels();
+    @GetMapping("/{hotel}")
     Optional<HotelResponse> getHotelByName(@PathVariable("hotel") String hotel);
-    @GetMapping("{hotel-name}/rooms/{Id}")
-    Optional<RoomResponse> getRoom(@PathVariable("Id") Integer number, @PathVariable("hotel-name") String hotelName);
-    @GetMapping("rooms")
+    @GetMapping("/{hotel-name}/rooms/{number}")
+    Optional<RoomResponse> getRoom(@PathVariable("number") Integer number, @PathVariable("hotel-name") String hotelName);
+    @GetMapping("/rooms")
     Optional<List<RoomResponse>> getAllHotelsRooms(@RequestParam int hotel_id);
 }

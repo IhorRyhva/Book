@@ -37,8 +37,8 @@ public class HotelController {
     public ResponseEntity<List<RoomResponse>> getAllHotelsRooms(@RequestParam int hotel_id){
         return ResponseEntity.ok(roomService.getAllRoomsByHotelId(hotel_id));
     }
-    @GetMapping("{hotel-name}/rooms/{Id}")
-    public ResponseEntity<RoomResponse> getRoom(@PathVariable("Id") Integer number,
+    @GetMapping("{hotel-name}/rooms/{number}")
+    public ResponseEntity<RoomResponse> getRoom(@PathVariable("number") Integer number,
                                                 @PathVariable("hotel-name") String hotelName){
         return ResponseEntity.ok(roomService.getRoom(number, hotelName));
     }

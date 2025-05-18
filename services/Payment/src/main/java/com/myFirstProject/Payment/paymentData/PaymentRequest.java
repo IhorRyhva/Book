@@ -9,6 +9,7 @@ public record PaymentRequest(
         Integer value,
         String email,
         Integer cardNumber,
-        PaymentType paymentType
+        PaymentType paymentType,
+        String message
 ) {
 }

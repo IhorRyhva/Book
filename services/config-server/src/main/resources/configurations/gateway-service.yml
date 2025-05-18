@@ -12,31 +12,18 @@ spring:
           uri: lb:http://BOOKING-SERVICE
           predicates:
             - Path=/books/**
-          filters:
-            - TokenRelay=
            #Hotel
         - id: hotel-microservice
           uri: lb:http://HOTEL-MICROSERVICE
           predicates:
             - Path=/hotels/**
-          filters:
-            - TokenRelay=
           #Payment
         - id: payment-service
           uri: lb:http://PAYMENT-SERVICE
           predicates:
             - Path=/payment/**
-          filters:
-            - TokenRelay=
           #User
         - id: user-service
           uri: lb:http://USER-SERVICE
           predicates:
             - Path=/User/**
-          filters:
-            - TokenRelay=
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: "http://localhost:9090/realms/book-hotel"

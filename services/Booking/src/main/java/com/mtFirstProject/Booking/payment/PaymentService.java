@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PaymentService {
-    public PaymentRequest create(Integer valuePerNight, int numberOfNight, String email, Integer cardNumber, PaymentType paymentType) {
+    public PaymentRequest create(Integer value, String email, Integer cardNumber, PaymentType paymentType, String message) {
         return PaymentRequest.builder()
-                .value(valuePerNight*numberOfNight)
+                .value(value)
                 .cardNumber(cardNumber)
                 .email(email)
                 .paymentType(paymentType)
+                .message(message)
                 .build();
     }
 }

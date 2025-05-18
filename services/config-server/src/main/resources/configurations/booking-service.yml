@@ -16,16 +16,6 @@ spring:
       ddl-auto: update
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: rykhvaihor@gmail.com
-    password: npthhzbxjidtrbgw
-    properties:
-      mail.smtp.auth: true
-      mail.smtp.starttls.enable: true
-      mail.smtp.starttls.required: true
-      mail.smtp.ssl.trust: smtp.gmail.com
   security:
       oauth2:
         resourceserver:

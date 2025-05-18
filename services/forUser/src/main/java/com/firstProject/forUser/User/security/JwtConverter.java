@@ -24,4 +24,5 @@ public class JwtConverter implements Converter<Jwt, Collection<GrantedAuthority>
         List<String> roles = (List<String>) realmAccess.get("roles");
         return roles.stream().map(SimpleGrantedAuthority::new).peek(System.out::println).collect(Collectors.toList());
     }
+
 }

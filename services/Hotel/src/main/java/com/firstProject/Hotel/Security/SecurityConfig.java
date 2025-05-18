@@ -37,7 +37,7 @@ public class SecurityConfig {
                         .requestMatchers(
                         "/hotels/add")
                         .hasAuthority("client-admin")
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
                         .oauth2ResourceServer(outh2 -> outh2.jwt(
                                 jwt -> jwt.jwtAuthenticationConverter(jwtConvertor())
                         ));

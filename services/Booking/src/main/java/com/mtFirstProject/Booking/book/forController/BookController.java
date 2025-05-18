@@ -3,6 +3,7 @@ package com.mtFirstProject.Booking.book.forController;
 import com.mtFirstProject.Booking.book.data.BookRequest;
 import com.mtFirstProject.Booking.book.data.BookResponse;
 import com.mtFirstProject.Booking.book.data.DateOfBook;
+import com.mtFirstProject.Booking.hotelAndRoom.HotelResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +44,9 @@ public class BookController {
         return ResponseEntity.accepted().build();
     }
 
-    @PostMapping("all/search")
-    public ResponseEntity<List<BookResponse>> searchFree(@RequestBody DateOfBook dateOfBook){
+    @PostMapping("search")
+    public ResponseEntity<List<HotelResponse>> searchFree(@RequestBody DateOfBook dateOfBook){
+        System.out.println(dateOfBook.settlement());
         return ResponseEntity.ok(helper.getFreeInTheseDays(dateOfBook));
     }
 }
