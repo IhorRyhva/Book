@@ -19,7 +19,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
 
-        http.authorizeHttpRequests(auth -> auth
+        http
+                .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**",
                         "/v2/api-docs",
                         "/v3/api-docs",
@@ -56,7 +57,6 @@ public class SecurityConfig {
 
         JwtAuthenticationConverter jwtAuthentication = new JwtAuthenticationConverter();
         jwtAuthentication.setJwtGrantedAuthoritiesConverter(jwtConverter);
-        //jwtConverter.print();
         return jwtAuthentication;
     }
 }

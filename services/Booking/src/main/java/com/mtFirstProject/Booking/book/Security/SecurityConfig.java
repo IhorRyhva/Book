@@ -1,14 +1,13 @@
-package com.firstProject.Hotel.Security;
+package com.mtFirstProject.Booking.book.Security;
 
-import com.mtFirstProject.Booking.book.Security.JwtConvert;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -21,7 +20,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth -> auth
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**",
                                 "/v2/api-docs",
                                 "/v3/api-docs",
@@ -35,8 +36,8 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/ws/**")
                         .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/books/search").permitAll()
                         .requestMatchers(
-                                "/books/*",
                                 "/books/all",
                                 "/books/all/*",
                                 "/books/delete/*")
@@ -53,9 +54,10 @@ public class SecurityConfig {
     }
     @Bean
     public JwtAuthenticationConverter jwtConvertor() {
-        JwtConvert jwtConvert = new JwtConvert();
-        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
-        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtConvert);
-        return jwtAuthenticationConverter;
+        JwtConvert jwtConverter = new JwtConvert();
+
+        JwtAuthenticationConverter jwtAuthentication = new JwtAuthenticationConverter();
+        jwtAuthentication.setJwtGrantedAuthoritiesConverter(jwtConverter);
+        return jwtAuthentication;
     }
 }

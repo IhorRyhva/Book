@@ -11,8 +11,8 @@ public record ForSort(
         String location,
         Stars stars,
         Rate rate,
-        Integer maxWorthPerNight,
-        Integer minWorthPerNight,
-        Integer numberOfBed
+        int maxWorthPerNight,
+        int minWorthPerNight,
+        int numberOfBed
 ) {
 }
