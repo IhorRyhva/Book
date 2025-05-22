@@ -1,4 +1,4 @@
-package com.mtFirstProject.Booking.book.Security;
+package com.firstProject.Hotel.Security;
 
 import com.mtFirstProject.Booking.book.Security.JwtConvert;
 import org.springframework.context.annotation.Bean;
