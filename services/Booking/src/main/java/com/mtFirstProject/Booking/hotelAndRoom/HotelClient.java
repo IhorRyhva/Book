@@ -23,6 +23,6 @@ public interface HotelClient {
     Optional<RoomResponse> getRoom(@PathVariable("number") Integer number, @PathVariable("hotel-name") String hotelName);
     @GetMapping("/rooms")
     Optional<List<RoomResponse>> getAllHotelsRooms(@RequestParam int hotel_id);
-    @GetMapping("location")
-    Optional<List<HotelResponse>> getHotelsByLocation(@RequestBody String location);
+    @GetMapping("/location")
+    Optional<List<HotelResponse>> getHotelsByLocation(@RequestParam String location);
 }

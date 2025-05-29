@@ -36,7 +36,7 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/ws/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/books/search").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/books/search").permitAll()
                         .requestMatchers(
                                 "/books/all",
                                 "/books/all/*",

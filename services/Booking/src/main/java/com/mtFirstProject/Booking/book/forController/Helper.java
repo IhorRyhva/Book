@@ -22,9 +22,9 @@ public class Helper {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final HotelClient hotelClient;
-    public String getMessage(String eviction, String settlement, Integer value, RoomResponse room, HotelResponse hotel) {
+    public String getMessage(String eviction, String settlement, int value, RoomResponse room, HotelResponse hotel) {
         return String.format("You book from %s to %s, paid %n, room %n (%s), in hotel %s",
-                settlement, eviction, value, room.number(), room.rate().name(), hotel.name());
+                settlement, eviction, value, room.number(), room.rate().name().toString(), hotel.name());
     }
 
 
@@ -56,24 +56,29 @@ public class Helper {
         HashMap<String, HotelResponse> hotelsMap = new HashMap<>();
         List<HotelResponse> hotelsList;
 
+        /**location**/
         if(forSort.location() != null && !forSort.location().isEmpty()){
             hotelsList = hotelClient.getHotelsByLocation(forSort.location()).get();
         }else{
             hotelsList = hotelClient.getAllHotels().get();
         }
 
+        /**stars**/
         if(forSort.stars() != null){
             sortForStars(hotelsList, forSort.stars());
         }
 
+        /**rate**/
         if(forSort.rate() != null){
             sortForRate(hotelsList, forSort.rate());
         }
 
+        /**numberOfBed**/
         if(forSort.numberOfBed() != 0){
             sortForNumberOfBed(hotelsList, forSort.numberOfBed());
         }
 
+        /**byPrice**/
         if(
                 forSort.maxWorthPerNight() >= forSort.minWorthPerNight() &&
                 forSort.maxWorthPerNight() > 0 &&
@@ -82,6 +87,7 @@ public class Helper {
             sortForWorth(hotelsList, forSort.maxWorthPerNight(), forSort.minWorthPerNight());
         }
 
+        /**byDate**/
         if(
                 forSort.settlement() != null &&
                 forSort.eviction() != null &&
@@ -89,8 +95,7 @@ public class Helper {
                 LocalDate.now().isBefore(forSort.settlement())
 
         ) {
-            hotelsMap = toMap(hotelsList);
-            hotelsMap = getFreeRooms(forSort, hotelsMap);
+            hotelsMap = getFreeRooms(forSort, toMap(hotelsList));
         }else{
             /**Say that date is incorect**/
             return hotelsList;
@@ -101,43 +106,27 @@ public class Helper {
 
     private void sortForWorth(List<HotelResponse> hotelsList, Integer maxWorthPerNight, Integer minWorthPerNight) {
         for(HotelResponse hotelResponse: hotelsList){
-            for(RoomResponse roomResponse: hotelResponse.rooms()){
-                if(
-                        roomResponse.worthPerNight() > maxWorthPerNight ||
-                        roomResponse.worthPerNight() < minWorthPerNight
-                ){
-                    hotelResponse.rooms().remove(roomResponse);
-                }
-            }
+            hotelResponse.rooms().removeIf(
+                    roomResponse -> roomResponse.worthPerNight() > maxWorthPerNight
+                                    || roomResponse.worthPerNight() < minWorthPerNight
+            );
         }
     }
 
     private void sortForNumberOfBed(List<HotelResponse> hotelsList, Integer numberOfBed) {
         for(HotelResponse hotelResponse: hotelsList){
-            for(RoomResponse roomResponse: hotelResponse.rooms()){
-                if(roomResponse.numberOfBed() != numberOfBed){
-                    hotelResponse.rooms().remove(roomResponse);
-                }
-            }
+            hotelResponse.rooms().removeIf(roomResponse -> roomResponse.numberOfBed() != numberOfBed);
         }
     }
 
     private void sortForRate(List<HotelResponse> hotelsList, Rate rate) {
         for(HotelResponse hotelResponse: hotelsList){
-            for(RoomResponse roomResponse: hotelResponse.rooms()){
-                if(roomResponse.rate() != rate){
-                    hotelResponse.rooms().remove(roomResponse);
-                }
-            }
+            hotelResponse.rooms().removeIf(roomResponse -> roomResponse.rate() != rate);
         }
     }
 
     private void sortForStars(List<HotelResponse> hotelsList, Stars stars) {
-        for(HotelResponse hotelResponse: hotelsList){
-            if(hotelResponse.stars() != stars){
-                hotelsList.remove(hotelResponse);
-            }
-        }
+        hotelsList.removeIf(hotelResponse -> hotelResponse.stars() != stars);
     }
 
     private HashMap<String, HotelResponse> getFreeRooms(ForSort forSort, HashMap<String, HotelResponse> hotels) {
@@ -151,7 +140,8 @@ public class Helper {
                     book.getSettlement().isEqual(settlement) ||
                     book.getEviction().isEqual(eviction)
             ){
-                hotels.get(book.getHotel_name()).rooms().remove(book.getRoomId() - 1);
+                if(hotels.containsKey(book.getHotel_name()))
+                    hotels.get(book.getHotel_name()).rooms().remove(book.getRoomId() - 1);
             }
         }
         return hotels;
@@ -171,9 +161,11 @@ public class Helper {
 
     private HashMap<String, HotelResponse> toMap(List<HotelResponse> allHotels) {
         HashMap<String, HotelResponse> map = new HashMap<>();
+        System.out.println("line176" + allHotels.size());
         for(HotelResponse hotelResponse: allHotels){
             map.put(hotelResponse.name(), hotelResponse);
         }
+        System.out.println(map.size());
         return map;
     }
 

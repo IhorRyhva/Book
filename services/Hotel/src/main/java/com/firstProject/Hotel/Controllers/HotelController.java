@@ -43,7 +43,7 @@ public class HotelController {
         return ResponseEntity.ok(roomService.getRoom(number, hotelName));
     }
     @GetMapping("location")
-    public ResponseEntity<List<HotelResponse>> getHotelsByLocation(@RequestBody String location){
+    public ResponseEntity<List<HotelResponse>> getHotelsByLocation(@RequestParam String location){
         return ResponseEntity.ok(hotelService.getByLocation(location));
     }
 

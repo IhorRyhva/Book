@@ -9,6 +9,7 @@ import com.mtFirstProject.Booking.payment.PaymentRequest;
 import com.mtFirstProject.Booking.payment.PaymentService;
 import com.mtFirstProject.Booking.user.UserClient;
 import com.mtFirstProject.Booking.user.UserResponse;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,13 @@ public class BookService {
         var room = this.hotelClient.getRoom(request.roomNumber(), hotel.name()).orElseThrow();
         System.out.println(room.number());
 
-        var user = userClient.findByName(request.userEmail()).orElseThrow();
+        UserResponse user;
+        try {
+            user = userClient.findByName(request.userEmail()).orElseThrow();
+        }catch (FeignException e){
+            user = new UserResponse(0, "unknownUser", "unknownUser", request.userEmail());
+        }
+
         System.out.println(user.firstName());
 
         Book book = saveBook(request);
