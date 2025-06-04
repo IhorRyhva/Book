@@ -4,7 +4,9 @@ import Keycloak from 'keycloak-js';
 @Injectable({
   providedIn: 'root'
 })
+
 export class KeycloakService {
+
 
   private _keycloak: Keycloak | undefined;
   constructor() { }
@@ -52,3 +54,4 @@ export class KeycloakService {
     return this.keycloak.accountManagement();
   }
 }
+const keycloak = new KeycloakService();

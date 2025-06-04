@@ -13,10 +13,11 @@
   </nav>
   <div class="header__actions">
     <span class="header__currency"></span>
-    <button class="header__button">
-      <a href="http://localhost:9090/realms/book-hotel/protocol/openid-connect/auth?client_id=krasavchik&response_type=code&redirect_uri=http://localhost:4200/logined">
-        Увійти
-      </a>
+    <button class="header__button" (click)="logout()">
+      Вийти
+    </button>
+    <button class="header__button" (click)="userProfile()">
+      Інформація
     </button>
   </div>
 </header>
