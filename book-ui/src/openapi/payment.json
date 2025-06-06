@@ -88,6 +88,9 @@
               "VISA",
               "MASTER_CARD"
             ]
+          },
+          "message": {
+            "type": "string"
           }
         }
       },

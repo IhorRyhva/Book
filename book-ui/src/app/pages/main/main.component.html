@@ -13,10 +13,8 @@
   </nav>
   <div class="header__actions">
     <span class="header__currency"></span>
-    <button class="header__button">
-      <a href="http://localhost:9090/realms/book-hotel/protocol/openid-connect/auth?client_id=krasavchik&response_type=code&redirect_uri=http://localhost:4200/logined">
+    <button class="header__button" (click)="login()">
         Увійти
-      </a>
     </button>
   </div>
 </header>
@@ -30,6 +28,17 @@
     <input type="text" class="search-bar__date" value="пт, 16 трав. - сб, 17 трав.">
     <input type="text" class="search-bar__guests" value="4 дорослих · 0 дітей · 1 номер">
     <button class="search-bar__button">Шукати</button>
+  </div>
+  <app-hotels
+    [hotels]="hotels"
+  ></app-hotels>
+  <div>
+    <ul>
+      <li *ngFor="let hotel of hotels">
+        <h3>{{ hotel.name }}</h3>
+        <p>{{ hotel.rooms }}</p>
+      </li>
+    </ul>
   </div>
 </main>
 </body>

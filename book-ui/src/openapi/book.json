@@ -11,6 +11,39 @@
     }
   ],
   "paths": {
+    "/books/search": {
+      "post": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "searchFree",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForSort"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HotelResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/books/create": {
       "post": {
         "tags": [
@@ -156,6 +189,120 @@
   },
   "components": {
     "schemas": {
+      "ForSort": {
+        "type": "object",
+        "properties": {
+          "settlement": {
+            "type": "string",
+            "format": "date"
+          },
+          "eviction": {
+            "type": "string",
+            "format": "date"
+          },
+          "location": {
+            "type": "string"
+          },
+          "stars": {
+            "type": "string",
+            "enum": [
+              "ONE",
+              "TWO",
+              "THREE",
+              "FOUR",
+              "FIVE"
+            ]
+          },
+          "rate": {
+            "type": "string",
+            "enum": [
+              "LUX",
+              "FAMILY",
+              "ECONOMIC",
+              "PRESIDENT"
+            ]
+          },
+          "maxWorthPerNight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minWorthPerNight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numberOfBed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "HotelResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "stars": {
+            "type": "string",
+            "enum": [
+              "ONE",
+              "TWO",
+              "THREE",
+              "FOUR",
+              "FIVE"
+            ]
+          },
+          "location": {
+            "type": "string"
+          },
+          "rooms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoomResponse"
+            }
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RoomResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hotel_name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "rate": {
+            "type": "string",
+            "enum": [
+              "LUX",
+              "FAMILY",
+              "ECONOMIC",
+              "PRESIDENT"
+            ]
+          },
+          "numberOfBed": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "worthPerNight": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
       "BookRequest": {
         "required": [
           "hotel_name",
@@ -174,7 +321,7 @@
           "hotel_name": {
             "type": "string"
           },
-          "roomId": {
+          "roomNumber": {
             "type": "integer",
             "format": "int32"
           },

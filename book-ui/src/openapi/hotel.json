@@ -72,7 +72,7 @@
         }
       }
     },
-    "/hotels/{hotel-name}/rooms/{Id}": {
+    "/hotels/{hotel-name}/rooms/{number}": {
       "get": {
         "tags": [
           "hotel-controller"
@@ -80,7 +80,7 @@
         "operationId": "getRoom",
         "parameters": [
           {
-            "name": "Id",
+            "name": "number",
             "in": "path",
             "required": true,
             "schema": {
@@ -137,6 +137,39 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/RoomResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/hotels/location": {
+      "get": {
+        "tags": [
+          "hotel-controller"
+        ],
+        "operationId": "getHotelsByLocation",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HotelResponse"
                   }
                 }
               }

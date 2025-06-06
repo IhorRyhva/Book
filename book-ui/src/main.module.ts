@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {AppComponent} from './app/app.component';
 import {MainComponent} from './app/pages/main/main.component';
 import {LoginedComponent} from './app/pages/log-in/log-in.component';
+import {HotelsComponent} from './app/hotels/hotels.component';
 
 
 
@@ -10,7 +11,8 @@ import {LoginedComponent} from './app/pages/log-in/log-in.component';
   declarations:[
     AppComponent,
     MainComponent,
-    LoginedComponent
+    LoginedComponent,
+    HotelsComponent
   ],
   imports:[
     BrowserModule
