@@ -23,8 +23,8 @@ public class Helper {
     private final BookMapper bookMapper;
     private final HotelClient hotelClient;
     public String getMessage(String eviction, String settlement, int value, RoomResponse room, HotelResponse hotel) {
-        return String.format("You book from %s to %s, paid %n, room %n (%s), in hotel %s",
-                settlement, eviction, value, room.number(), room.rate().name().toString(), hotel.name());
+        return String.format("You book from %s to %s, paid %d, room %d (%s), in hotel %s",
+                settlement, eviction, value, room.number(), room.rate().name(), hotel.name());
     }
 
 

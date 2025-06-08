@@ -28,7 +28,7 @@ public class BookService {
     private final PaymentClient paymentClient;
     private final PaymentService paymentService;
     private final Helper helper;
-    DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 //    private final BookProducer producer;
 
     @Transactional
@@ -46,17 +46,17 @@ public class BookService {
             user = new UserResponse(0, "unknownUser", "unknownUser", request.userEmail());
         }
 
-        System.out.println(user.firstName());
+        //System.out.println(user.firstName());
 
         Book book = saveBook(request);
-        String eviction = CUSTOM_FORMATTER.format(book.getEviction());
-        String settlement = CUSTOM_FORMATTER.format(book.getSettlement());
+        LocalDate eviction = book.getEviction();
+        LocalDate settlement = book.getSettlement();
 
         int value = (book.getBusyDays().size() + 1) * room.worthPerNight();
-        String message = helper.getMessage(eviction, settlement, value, room, hotel);
+        String message = helper.getMessage(eviction.toString(), settlement.toString(), value, room, hotel);
         var payment = getPaymentRequest(request, value, user, message);
 
-        System.out.println(payment.paymentType() + payment.message() + payment.value() + payment.cardNumber() + payment.email());
+        //System.out.println(payment.paymentType() + payment.message() + payment.value() + payment.cardNumber() + payment.email());
         paymentClient.createPayment(payment);
         bookRepository.save(book);
         return bookMapper.toResponse(book);

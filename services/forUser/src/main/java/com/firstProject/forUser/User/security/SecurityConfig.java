@@ -34,7 +34,10 @@ public class SecurityConfig {
                         "/swagger-ui.html",
                         "/ws/**")
                 .permitAll()
-                .requestMatchers("/User/all")
+                .requestMatchers(
+                        "/User/all",
+                          "delete/{user-email}"
+                        )
                         .hasAuthority("client-admin")
                 .anyRequest()
                     .permitAll())
