@@ -9,16 +9,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class JwtConvert implements Converter<Jwt, Collection<GrantedAuthority>> {
-    @Override
-    public Collection<GrantedAuthority> convert(Jwt jwt) {
-        Map<String, Object> realms = jwt.getClaim("realm_access");
 
-        if(realms == null || !realms.containsKey("roles")){
-            List<String> roles = new ArrayList<>();
-            roles.add("just-user");
-            return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    @Override
+    public Collection<GrantedAuthority> convert(Jwt source) {
+        Map<String, Object> claims = source.getClaim("realm_access");
+
+        if (claims == null || !claims.containsKey("roles")) {
+            List<String> role = new ArrayList<>();
+            role.add("just-user");
+            return role.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         }
-        List<String> roles = (List<String>) realms.get("roles");
+        Set<String> roles = (Set<String>) claims.get("roles");
         return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 }
