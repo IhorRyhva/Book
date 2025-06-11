@@ -12,13 +12,14 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserMapping mapping;
     private final UserRepository repository;
+
     public List<UserResponse> getAllUser() {
         InsertData insertData = new InsertData();
         insertData.create(repository);
         return repository
                 .findAll()
                 .stream()
-                .map(mapping::toResponse)
+                .map(mapping::toResponseAll)
                 .collect(Collectors.toList());
     }
     public Boolean exist(String email) {
@@ -26,11 +27,7 @@ public class UserService {
     }
 
     public UserResponse getById(int id) {
-       if(repository.existsById(id)){
-           return mapping.toResponse(repository.findById(id).get());
-       }else{
-           throw new RuntimeException();/**TODO **/
-       }
+       return mapping.toResponse(repository.findById(id));
     }
 
     public String create(UserRequest request) {

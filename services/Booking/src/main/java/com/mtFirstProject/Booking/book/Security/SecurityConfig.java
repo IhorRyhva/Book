@@ -3,7 +3,9 @@ package com.mtFirstProject.Booking.book.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,6 +15,14 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity
@@ -21,6 +31,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**",
@@ -43,21 +54,38 @@ public class SecurityConfig {
                                 "/books/delete/*")
                         .hasAuthority("client-admin")
                         .anyRequest().permitAll())
-                .oauth2ResourceServer(outh2 -> outh2.jwt(
-                        jwt -> jwt.jwtAuthenticationConverter(jwtConvertor())
-                ));
+                .oauth2ResourceServer(
+                        oauth -> oauth
+                                .jwt(
+                                        jwt -> jwt.jwtAuthenticationConverter(new KeyCloakAuthenticationToken())
+                                )
+                        );
         return http.build();
     }
     @Bean
     public JwtDecoder jwtDecoder(){
         return NimbusJwtDecoder.withJwkSetUri("http://localhost:9090/realms/book-hotel/protocol/openid-connect/certs").build();
     }
-    @Bean
-    public JwtAuthenticationConverter jwtConvertor() {
-        JwtConvert jwtConverter = new JwtConvert();
 
-        JwtAuthenticationConverter jwtAuthentication = new JwtAuthenticationConverter();
-        jwtAuthentication.setJwtGrantedAuthoritiesConverter(jwtConverter);
-        return jwtAuthentication;
+    @Bean
+    public CorsFilter corsFilter(){
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        configuration.setAllowedHeaders(Arrays.asList(
+                HttpHeaders.ORIGIN,
+                HttpHeaders.CONTENT_TYPE,
+                HttpHeaders.AUTHORIZATION,
+                HttpHeaders.ACCEPT
+        ));
+
+        configuration.setAllowedMethods(Arrays.asList(
+                "GET", "POST", "DELETE"
+        ));
+        source.registerCorsConfiguration("/**", configuration);
+        return new CorsFilter(source);
     }
+
 }

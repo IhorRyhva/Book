@@ -6,8 +6,7 @@ import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor
+
 public class InsertData {
     public void create(UserRepository repository){
         for (int i = 0; i < 20; i++) {
