@@ -16,6 +16,8 @@ spring:
           jwt:
             issuer-uri: "http://localhost:9090/realms/book-hotel"
             jwk-set-uri: "http://localhost:9090/realms/book-hotel/protocol/openid-connect/certs"
+  springdoc:
+    default-produces-media-type: application/json
 keycloak:
   auth-server-url: http://localhost:9090
   realm: book-hotel

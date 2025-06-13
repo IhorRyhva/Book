@@ -20,5 +20,7 @@ spring:
       mail.smtp.starttls.enable: true
       mail.smtp.starttls.required: true
       mail.smtp.ssl.trust: smtp.gmail.com
+  springdoc:
+    default-produces-media-type: application/json
 server:
   port: 8020

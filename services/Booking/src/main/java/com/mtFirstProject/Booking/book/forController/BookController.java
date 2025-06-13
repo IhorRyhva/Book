@@ -4,14 +4,16 @@ import com.mtFirstProject.Booking.book.data.BookRequest;
 import com.mtFirstProject.Booking.book.data.BookResponse;
 import com.mtFirstProject.Booking.book.data.ForSort;
 import com.mtFirstProject.Booking.hotelAndRoom.HotelResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
+
+
 @RequiredArgsConstructor
 @RestController
+@Tag(name = "Book")
 @RequestMapping("/books/")
 public class BookController {
     private final BookService service;

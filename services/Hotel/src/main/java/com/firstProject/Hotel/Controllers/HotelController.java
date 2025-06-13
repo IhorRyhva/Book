@@ -2,6 +2,7 @@ package com.firstProject.Hotel.Controllers;
 
 import com.firstProject.Hotel.Model.Hotel.*;
 import com.firstProject.Hotel.Model.Room.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/hotels/")
 @RequiredArgsConstructor
+@Tag(name = "Book")
 public class HotelController {
 
     private final HotelService hotelService;

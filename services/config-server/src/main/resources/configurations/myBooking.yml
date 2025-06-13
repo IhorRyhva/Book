@@ -1,14 +1,14 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 1111
+    url: http://localhost:3306/myBooking
     username: root
-    url: jdbc:mysql://localhost:3306/user
+    password: 1111
   jpa:
-    show-sql: false
+    database: mysql
+    show-sql: true
     hibernate:
       ddl-auto: update
-    database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
   security:
     oauth2:
@@ -16,8 +16,8 @@ spring:
         jwt:
           issuer-uri: "http://localhost:9090/realms/book-hotel"
           jwk-set-uri: "http://localhost:9090/realms/book-hotel/protocol/openid-connect/certs"
-  springdoc:
-    default-produces-media-type: application/json
+    springdoc:
+      default-produces-media-type: application/json
 keycloak:
   auth-server-url: http://localhost:9090
   realm: book-hotel
@@ -26,4 +26,4 @@ keycloak:
     secret: pJrSiE47lYdcQaA2qqrO7T2zg42ERcmJ
   use-resource-role-mappings: true
 server:
-  port: 1488
+  port: 1112

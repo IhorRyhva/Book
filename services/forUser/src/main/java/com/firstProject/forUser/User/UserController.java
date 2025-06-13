@@ -1,5 +1,6 @@
 package com.firstProject.forUser.User;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/User/")
 @RequiredArgsConstructor
+@Tag(name = "User")
 public class UserController {
     private final UserService service;
     //ALL//
