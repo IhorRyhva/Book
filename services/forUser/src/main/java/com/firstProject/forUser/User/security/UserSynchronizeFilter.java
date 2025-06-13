@@ -19,12 +19,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserSynchronizeFilter extends OncePerRequestFilter {
 
-    private final UserRepository userRepository;
     private final UserSynchronizer synchronizer;
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
+                                    @NonNull FilterChain filterChain){
 
         if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationFilter)){
             JwtAuthenticationToken token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();

@@ -1,5 +1,4 @@
-package com.mtFirstProject.Booking.book.Security;
-
+package com.firstProject.Hotel.Security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -16,23 +15,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
-public class KeyCloakAuthenticationToken implements Converter<Jwt, AbstractAuthenticationToken> {
+public class JwtConverted implements Converter<Jwt, AbstractAuthenticationToken> {
     @Override
     public AbstractAuthenticationToken convert(Jwt source) {
         return new JwtAuthenticationToken(
-                source,
-                Stream.concat(
+                source, Stream.concat(
                         new JwtGrantedAuthoritiesConverter().convert(source).stream(),
-                        getRolesFromJwt(source).stream()
-                        ).toList()
-                );
+                        extractRoles(source).stream()
+        ).toList()
+        );
     }
 
-    private Collection<? extends GrantedAuthority> getRolesFromJwt(Jwt source) {
-        var resource = new HashMap<>(source.getClaim("resource_access"));
+    private Collection<? extends GrantedAuthority> extractRoles(Jwt jwt){
+        var resource = new HashMap<>(jwt.getClaim("resource_access"));
 
-        var client = (Map<String, List<String>>) resource.get("krasavchik");
+        var client = (Map<String, List<String>>)resource.get("krasavchik");
 
         var roles = client.get("roles");
         return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
