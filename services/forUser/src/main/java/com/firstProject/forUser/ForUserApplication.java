@@ -9,19 +9,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@SecurityScheme(
-		name = "keycloak",
-		type = SecuritySchemeType.OAUTH2,
-		bearerFormat = "JWT",
-		scheme = "bearer",
-		in = SecuritySchemeIn.HEADER,
-		flows = @OAuthFlows(
-				password = @OAuthFlow(
-						authorizationUrl = "http://localhost:9090/realms/book-hotel/protocol/openid-connect/auth",
-						tokenUrl = "http://localhost:9090/realms/book-hotel/protocol/openid-connect/token"
-				)
-		)
-)
 public class ForUserApplication {
 
 	public static void main(String[] args) {

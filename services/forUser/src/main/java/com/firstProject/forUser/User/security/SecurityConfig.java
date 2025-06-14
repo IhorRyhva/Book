@@ -67,27 +67,6 @@ public class SecurityConfig {
         return NimbusJwtDecoder.withJwkSetUri("http://localhost:9090/realms/book-hotel/protocol/openid-connect/certs").build();
     }
 
-    @Bean
-    public CorsFilter corsFilter(){
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-        configuration.setAllowedHeaders(Arrays.asList(
-                HttpHeaders.ORIGIN,
-                HttpHeaders.CONTENT_TYPE,
-                HttpHeaders.ACCEPT,
-                HttpHeaders.AUTHORIZATION
-        ));
-        configuration.setAllowedMethods(Arrays.asList(
-                "GET",
-                "POST",
-                "DELETE"
-        ));
-
-        source.registerCorsConfiguration("/**", configuration);
-        return new CorsFilter(source);
-    }
 
 }

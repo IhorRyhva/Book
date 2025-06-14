@@ -1,8 +1,11 @@
 package com.mtFirstProject.Booking.book.forController;
 
+import com.mtFirstProject.Booking.book.Security.ExtractUserEmail;
 import com.mtFirstProject.Booking.book.data.BookRequest;
 import com.mtFirstProject.Booking.book.data.BookResponse;
 import com.mtFirstProject.Booking.book.data.ForSort;
+import com.mtFirstProject.Booking.book.list.forControllers.ListOfBooksResponse;
+import com.mtFirstProject.Booking.book.list.forControllers.ListOfBooksService;
 import com.mtFirstProject.Booking.hotelAndRoom.HotelResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +16,17 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@Tag(name = "Book")
 @RequestMapping("/books/")
 public class BookController {
     private final BookService service;
     private final Helper helper;
+    private final ListOfBooksService serviceOfList;
+    private final ExtractUserEmail email;
 
     @PostMapping("create")
     public ResponseEntity<BookResponse> createBook(@RequestBody BookRequest request) {
+        System.out.println("ok");
+        serviceOfList.createNewList(request);
         return ResponseEntity.ok(service.createBook(request));
     }
 
@@ -50,5 +56,11 @@ public class BookController {
     public ResponseEntity<List<HotelResponse>> searchFree(@RequestBody ForSort forSort){
         System.out.println(forSort.settlement());
         return ResponseEntity.ok(helper.chooseHotelAndRoomForSort(forSort));
+    }
+
+
+    @GetMapping("list/getMyBooking")
+    public ResponseEntity<List<ListOfBooksResponse>> getListOfBooks(){
+        return ResponseEntity.ok(serviceOfList.getAll(email.getEmail()));
     }
 }

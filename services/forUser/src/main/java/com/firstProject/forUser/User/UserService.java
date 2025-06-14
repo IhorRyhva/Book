@@ -1,6 +1,5 @@
 package com.firstProject.forUser.User;
 
-import com.firstProject.forUser.User.insertedData.InsertData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,6 @@ public class UserService {
     private final UserRepository repository;
 
     public List<UserResponse> getAllUser() {
-        InsertData insertData = new InsertData();
-        insertData.create(repository);
         return repository
                 .findAll()
                 .stream()

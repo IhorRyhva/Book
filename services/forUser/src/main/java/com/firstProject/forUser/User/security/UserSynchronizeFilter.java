@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
@@ -23,12 +24,13 @@ public class UserSynchronizeFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
-                                    @NonNull FilterChain filterChain){
+                                    @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-        if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationFilter)){
+        if(!(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken)){
             JwtAuthenticationToken token = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
 
             synchronizer.synchronizedWitIdp(token.getToken());
         }
+        filterChain.doFilter(request, response);
     }
 }

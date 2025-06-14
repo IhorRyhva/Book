@@ -49,6 +49,7 @@ public class SecurityConfig {
                                 "/ws/**")
                         .permitAll()
                         .requestMatchers(HttpMethod.GET, "/books/search").permitAll()
+                        .requestMatchers("/books/list/").authenticated()
                         .requestMatchers(
                                 "/books/all",
                                 "/books/all/*",

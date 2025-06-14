@@ -16,20 +16,12 @@
         <module name="Hotel" />
         <module name="gateway" />
       </profile>
-      <profile name="Annotation profile for myBooking" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="myBooking" />
-      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="config-server (1)" target="17" />
       <module name="config-server (2)" target="17" />
       <module name="discovery" target="17" />
+      <module name="myBooking" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
