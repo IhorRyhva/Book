@@ -1,0 +1,28 @@
+<nav class="top-navbar">
+  <div class="container">
+    <div class="logo">Booking.com</div>
+    <div class="right-section">
+      <span class="currency">UAH 🇺🇦</span>
+      <button class="btn">Зареєструватися</button>
+      <button class="btn secondary">Увійти</button>
+    </div>
+  </div>
+</nav>
+
+<nav class="sub-menu">
+  <div class="container">
+    <a class="active">🏨 Помешкання</a>
+  </div>
+</nav>
+
+<!-- 🔶 Hero Section with Search -->
+<header class="header">
+  <div class="container">
+    <h1>Знайдіть помешкання для наступної подорожі</h1>
+    <p>Знаходьте пропозиції готелів, приватних помешкань та багато іншого...</p>
+
+  </div>
+</header>
+<app-hotel-list
+  [hotels]="hotels"
+></app-hotel-list>
