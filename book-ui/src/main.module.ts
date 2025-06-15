@@ -2,17 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {AppComponent} from './app/app.component';
 import {MainComponent} from './app/pages/main/main.component';
-import {LoginedComponent} from './app/pages/log-in/log-in.component';
-import {HotelsComponent} from './app/hotels/hotels.component';
+import {HotelListComponent} from './app/components/hotel-list/hotel-list.component';
 
 
 
 @NgModule({
-  declarations:[
+  declarations: [
     AppComponent,
     MainComponent,
-    LoginedComponent,
-    HotelsComponent
+    HotelListComponent,
   ],
   imports:[
     BrowserModule

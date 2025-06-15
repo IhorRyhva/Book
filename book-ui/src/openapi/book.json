@@ -105,6 +105,29 @@
         }
       }
     },
+    "/books/list/getMyBooking": {
+      "get": {
+        "tags": [
+          "book-controller"
+        ],
+        "operationId": "getListOfBooks",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListOfBooksResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/books/all": {
       "get": {
         "tags": [
@@ -357,6 +380,26 @@
           },
           "userEmail": {
             "type": "string"
+          }
+        }
+      },
+      "ListOfBooksResponse": {
+        "type": "object",
+        "properties": {
+          "settlement": {
+            "type": "string",
+            "format": "date"
+          },
+          "eviction": {
+            "type": "string",
+            "format": "date"
+          },
+          "hotel_name": {
+            "type": "string"
+          },
+          "roomNumber": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       }

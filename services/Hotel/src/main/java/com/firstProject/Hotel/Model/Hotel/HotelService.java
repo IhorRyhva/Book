@@ -17,6 +17,7 @@ public class HotelService {
     private final HotelRepository repository;
     private final HotelMapper mapper;
     public List<HotelResponse> getAll() {
+        System.out.println(repository.findAll().size());
         return repository
                 .findAll()
                 .stream()
